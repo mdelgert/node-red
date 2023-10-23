@@ -15,20 +15,16 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "test5",
+        "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 140,
+        "x": 120,
         "y": 100,
         "wires": [
             [
@@ -45,11 +41,11 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "topic",
+        "complete": "payload",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 360,
+        "x": 280,
         "y": 100,
         "wires": []
     },
