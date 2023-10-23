@@ -45,11 +45,12 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "topic",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 140,
-        "y": 180,
+        "x": 380,
+        "y": 100,
         "wires": []
     },
     {
