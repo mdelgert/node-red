@@ -25,7 +25,7 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "test2",
+        "topic": "test3",
         "payload": "",
         "payloadType": "date",
         "x": 140,
