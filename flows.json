@@ -25,10 +25,10 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "test",
         "payload": "",
         "payloadType": "date",
-        "x": 120,
+        "x": 140,
         "y": 100,
         "wires": [
             [
@@ -48,7 +48,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 300,
+        "x": 340,
         "y": 100,
         "wires": []
     },
