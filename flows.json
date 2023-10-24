@@ -8,6 +8,12 @@
         "env": []
     },
     {
+        "id": "301e0d502bbe927d",
+        "type": "sqlitedb",
+        "db": "/data/northwind.db",
+        "mode": "RWC"
+    },
+    {
         "id": "6cb96fdebe6b37b7",
         "type": "inject",
         "z": "1bfd8fba4680f8c2",
@@ -45,7 +51,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 280,
+        "x": 300,
         "y": 100,
         "wires": []
     },
@@ -57,6 +63,111 @@
         "info": "",
         "x": 130,
         "y": 60,
+        "wires": []
+    },
+    {
+        "id": "4573aea3526b2c4b",
+        "type": "sqlite",
+        "z": "1bfd8fba4680f8c2",
+        "mydb": "301e0d502bbe927d",
+        "sqlquery": "fixed",
+        "sql": "SELECT * FROM Customers;",
+        "name": "",
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "46657219c1b07af1"
+            ]
+        ]
+    },
+    {
+        "id": "39cef895448c6c1d",
+        "type": "http in",
+        "z": "1bfd8fba4680f8c2",
+        "name": "",
+        "url": "/customers",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 160,
+        "wires": [
+            [
+                "4573aea3526b2c4b"
+            ]
+        ]
+    },
+    {
+        "id": "46657219c1b07af1",
+        "type": "http response",
+        "z": "1bfd8fba4680f8c2",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 540,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "700b46aaa7c340e1",
+        "type": "http in",
+        "z": "1bfd8fba4680f8c2",
+        "name": "",
+        "url": "/orders",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "1f8dd9a82d70750b"
+            ]
+        ]
+    },
+    {
+        "id": "1f8dd9a82d70750b",
+        "type": "sqlite",
+        "z": "1bfd8fba4680f8c2",
+        "mydb": "301e0d502bbe927d",
+        "sqlquery": "fixed",
+        "sql": "SELECT * FROM Orders;",
+        "name": "",
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "f4cfbd07e9772201",
+                "45b668d2b0edb1f3"
+            ]
+        ]
+    },
+    {
+        "id": "f4cfbd07e9772201",
+        "type": "http response",
+        "z": "1bfd8fba4680f8c2",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 540,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "45b668d2b0edb1f3",
+        "type": "debug",
+        "z": "1bfd8fba4680f8c2",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 280,
         "wires": []
     }
 ]
