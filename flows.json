@@ -50,7 +50,7 @@
     {
         "id": "e82ea49574f48a97",
         "type": "sqlitedb",
-        "db": "/data/northwind.db",
+        "db": "/data/projects/node-red/northwind.db",
         "mode": "RWC"
     },
     {
@@ -221,7 +221,7 @@
         "sqlquery": "fixed",
         "sql": "SELECT * FROM Customers;",
         "name": "",
-        "x": 350,
+        "x": 410,
         "y": 160,
         "wires": [
             [
@@ -254,7 +254,7 @@
         "name": "",
         "statusCode": "200",
         "headers": {},
-        "x": 540,
+        "x": 720,
         "y": 160,
         "wires": []
     },
@@ -268,7 +268,7 @@
         "upload": false,
         "swaggerDoc": "fd8f701f403fcb95",
         "x": 130,
-        "y": 300,
+        "y": 280,
         "wires": [
             [
                 "1f8dd9a82d70750b"
@@ -283,8 +283,8 @@
         "sqlquery": "fixed",
         "sql": "SELECT * FROM Orders;",
         "name": "",
-        "x": 350,
-        "y": 300,
+        "x": 410,
+        "y": 280,
         "wires": [
             [
                 "f4cfbd07e9772201",
@@ -299,8 +299,8 @@
         "name": "",
         "statusCode": "200",
         "headers": {},
-        "x": 540,
-        "y": 300,
+        "x": 700,
+        "y": 280,
         "wires": []
     },
     {
@@ -315,8 +315,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 540,
-        "y": 360,
+        "x": 700,
+        "y": 340,
         "wires": []
     },
     {
@@ -332,7 +332,7 @@
         "targetType": "jsonata",
         "statusVal": "",
         "statusType": "auto",
-        "x": 540,
+        "x": 700,
         "y": 220,
         "wires": []
     },
@@ -387,7 +387,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 120,
-        "y": 420,
+        "y": 360,
         "wires": [
             [
                 "290f8dc181d2f6ea"
@@ -402,8 +402,8 @@
         "sqlquery": "fixed",
         "sql": "SELECT * FROM Customers;",
         "name": "",
-        "x": 330,
-        "y": 420,
+        "x": 410,
+        "y": 360,
         "wires": [
             [
                 "37c24dc9a5fea2b7"
@@ -422,8 +422,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 540,
-        "y": 420,
+        "x": 700,
+        "y": 400,
         "wires": []
     },
     {
@@ -522,7 +522,7 @@
         "name": "",
         "statusCode": "200",
         "headers": {},
-        "x": 560,
+        "x": 620,
         "y": 140,
         "wires": []
     },
@@ -531,14 +531,14 @@
         "type": "file in",
         "z": "082a52132f78c0e1",
         "name": "",
-        "filename": "/data/test.htm",
+        "filename": "/data/projects/node-red/test.htm",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 320,
+        "x": 370,
         "y": 80,
         "wires": [
             [
@@ -559,7 +559,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 560,
+        "x": 620,
         "y": 80,
         "wires": []
     },
