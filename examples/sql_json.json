@@ -1,0 +1,383 @@
+[
+    {
+        "id": "a1a2a771626c645c",
+        "type": "tab",
+        "label": "sql-video",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "523b89ce5226e075",
+        "type": "template",
+        "z": "a1a2a771626c645c",
+        "name": "dataTable",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "mustache",
+        "template": "DEVICE TEXT NOT NULL,\nDATA TEXT NOT NULL",
+        "output": "str",
+        "x": 420,
+        "y": 80,
+        "wires": [
+            [
+                "71bb863e23b9c23b"
+            ]
+        ]
+    },
+    {
+        "id": "71bb863e23b9c23b",
+        "type": "function",
+        "z": "a1a2a771626c645c",
+        "name": "Create dataTable",
+        "func": "var payload=msg.payload;\npayload = payload.replace(/(\\r\\n|\\n|\\r)/gm,\"\");\nmsg.topic=\"CREATE TABLE sensor_data2(\"+payload + \")\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 40,
+        "wires": [
+            [
+                "073f29b2e6cbe474",
+                "c3f1cf9a353bcb95"
+            ]
+        ]
+    },
+    {
+        "id": "073f29b2e6cbe474",
+        "type": "sqlite",
+        "z": "a1a2a771626c645c",
+        "mydb": "25cf17cc87f3840f",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "insert",
+        "x": 810,
+        "y": 360,
+        "wires": [
+            [
+                "c3f1cf9a353bcb95"
+            ]
+        ]
+    },
+    {
+        "id": "c43da7f7cffbfe51",
+        "type": "inject",
+        "z": "a1a2a771626c645c",
+        "name": "create sensor_data1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "CREATE TABLE sensor_data1(DEVICE TEXT NOT NULL,TIMESTAMP INT NOT NULL,TEMPERATURE REAL NOT NULL,HUMIDITY REAL NOT NULL)",
+        "payloadType": "date",
+        "x": 350,
+        "y": 200,
+        "wires": [
+            [
+                "073f29b2e6cbe474"
+            ]
+        ]
+    },
+    {
+        "id": "d738a96e3ae71f8c",
+        "type": "inject",
+        "z": "a1a2a771626c645c",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "drop table sensor_data2",
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "073f29b2e6cbe474"
+            ]
+        ]
+    },
+    {
+        "id": "c3f1cf9a353bcb95",
+        "type": "debug",
+        "z": "a1a2a771626c645c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "aee9a4b1c450824d",
+        "type": "function",
+        "z": "a1a2a771626c645c",
+        "name": "Create Sample Data",
+        "func": "let d=new Date();\nlet timestamp=d.getTime();\nlet x=Math.floor(Math.random() * 10);\nlet y=Math.floor(Math.random() * 100);\ntemp=10+x;\nhumidity=40+y;\nlet payload={timestamp:timestamp,temperature:temp,humidity:humidity};\npayload =JSON.stringify(payload);\nlet device=\"sensor1\";\nm_out=\"( device,data) values(\";\nm_out=m_out+\"\\'\"+device+\"\\',\" +\"\\'\"+payload+\"\\'\"; //this is the data \nm_out=m_out+\")\";\nvar topic=\"INSERT INTO  sensor_data2 \" +m_out;\nmsg.topic=topic;\nmsg.payload=\"\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "3287d7f15b5204ae",
+                "50905714ea845abe"
+            ]
+        ]
+    },
+    {
+        "id": "3287d7f15b5204ae",
+        "type": "sqlite",
+        "z": "a1a2a771626c645c",
+        "mydb": "25cf17cc87f3840f",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "insert",
+        "x": 630,
+        "y": 440,
+        "wires": [
+            [
+                "50905714ea845abe"
+            ]
+        ]
+    },
+    {
+        "id": "d215cbd4f395e172",
+        "type": "inject",
+        "z": "a1a2a771626c645c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 440,
+        "wires": [
+            [
+                "aee9a4b1c450824d"
+            ]
+        ]
+    },
+    {
+        "id": "50905714ea845abe",
+        "type": "debug",
+        "z": "a1a2a771626c645c",
+        "name": "insert out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "02155fa10497ab7b",
+        "type": "inject",
+        "z": "a1a2a771626c645c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from data where json_extract(data, '$.type') =humidity",
+        "payloadType": "date",
+        "x": 200,
+        "y": 560,
+        "wires": [
+            [
+                "04780e15c53d6928"
+            ]
+        ]
+    },
+    {
+        "id": "04780e15c53d6928",
+        "type": "function",
+        "z": "a1a2a771626c645c",
+        "name": "get temp >16",
+        "func": "msg.topic=\"select * from sensor_data2 where json_extract(sensor_data2.data,'$.temperature') >=16\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 560,
+        "wires": [
+            [
+                "3287d7f15b5204ae"
+            ]
+        ]
+    },
+    {
+        "id": "6329d5c56a519471",
+        "type": "function",
+        "z": "a1a2a771626c645c",
+        "name": "update json value",
+        "func": "let temp=\"update sensor_data2 set data=\";\ntemp=temp+\"json_set(sensor_data2.data,'$.humidity',59) where json_extract(sensor_data2.data,'$.timestamp')=1650223112523\";\nmsg.topic=temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 660,
+        "wires": [
+            [
+                "3287d7f15b5204ae"
+            ]
+        ]
+    },
+    {
+        "id": "93e7162e1207f7ab",
+        "type": "inject",
+        "z": "a1a2a771626c645c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from data where json_extract(data, '$.type') =humidity",
+        "payloadType": "date",
+        "x": 220,
+        "y": 660,
+        "wires": [
+            [
+                "6329d5c56a519471"
+            ]
+        ]
+    },
+    {
+        "id": "1c7c0fa979a7a5b3",
+        "type": "inject",
+        "z": "a1a2a771626c645c",
+        "name": "create sensor_data2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "CREATE TABLE sensor_data2(DEVICE TEXT NOT NULL,DATA TEXT NOT NULL)",
+        "payloadType": "date",
+        "x": 350,
+        "y": 260,
+        "wires": [
+            [
+                "073f29b2e6cbe474"
+            ]
+        ]
+    },
+    {
+        "id": "1a4942a3900a7540",
+        "type": "inject",
+        "z": "a1a2a771626c645c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 40,
+        "wires": [
+            [
+                "523b89ce5226e075"
+            ]
+        ]
+    },
+    {
+        "id": "0abcc85574f256e6",
+        "type": "comment",
+        "z": "a1a2a771626c645c",
+        "name": "Function node and template",
+        "info": "I use theis function node with a suitable template to create the code to create the table",
+        "x": 570,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "25cf17cc87f3840f",
+        "type": "sqlitedb",
+        "db": "/home/steve/.node-red/results.db",
+        "mode": "RWC"
+    }
+]
