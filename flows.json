@@ -8,10 +8,12 @@
         "env": []
     },
     {
-        "id": "e82ea49574f48a97",
-        "type": "sqlitedb",
-        "db": "/data/projects/node-red/northwind.db",
-        "mode": "RWC"
+        "id": "94e9feb7e53ac9be",
+        "type": "tab",
+        "label": "Sqlite",
+        "disabled": false,
+        "info": "",
+        "env": []
     },
     {
         "id": "9607e1a9329589d4",
@@ -122,6 +124,12 @@
         "className": ""
     },
     {
+        "id": "bed9e688723fe50d",
+        "type": "sqlitedb",
+        "db": "/data//projects/node-red/examples/northwind.db",
+        "mode": "RWC"
+    },
+    {
         "id": "71b571d8a411b32c",
         "type": "http in",
         "z": "1bfd8fba4680f8c2",
@@ -194,7 +202,7 @@
                 "type": "msg"
             }
         ],
-        "x": 270,
+        "x": 290,
         "y": 340,
         "wires": [
             [
@@ -223,7 +231,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
+        "x": 120,
         "y": 340,
         "wires": [
             [
@@ -244,7 +252,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 470,
+        "x": 490,
         "y": 340,
         "wires": []
     },
@@ -386,7 +394,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
+        "x": 120,
         "y": 400,
         "wires": [
             [
@@ -407,7 +415,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 250,
+        "x": 270,
         "y": 400,
         "wires": []
     },
@@ -432,7 +440,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
+        "x": 120,
         "y": 460,
         "wires": [
             [
@@ -452,7 +460,7 @@
         "winHide": false,
         "oldrc": false,
         "name": "",
-        "x": 260,
+        "x": 280,
         "y": 460,
         "wires": [
             [
@@ -479,7 +487,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 510,
+        "x": 530,
         "y": 400,
         "wires": []
     },
@@ -496,7 +504,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 510,
+        "x": 530,
         "y": 440,
         "wires": []
     },
@@ -513,8 +521,85 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 490,
+        "x": 510,
         "y": 480,
         "wires": []
+    },
+    {
+        "id": "46d1afde3e8625ee",
+        "type": "http in",
+        "z": "94e9feb7e53ac9be",
+        "name": "",
+        "url": "/customers",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "af16b79c0b0e3d18"
+            ]
+        ]
+    },
+    {
+        "id": "af16b79c0b0e3d18",
+        "type": "sqlite",
+        "z": "94e9feb7e53ac9be",
+        "mydb": "bed9e688723fe50d",
+        "sqlquery": "fixed",
+        "sql": "SELECT * FROM Customers",
+        "name": "Northwind",
+        "x": 320,
+        "y": 100,
+        "wires": [
+            [
+                "7c5a29963e98090e"
+            ]
+        ]
+    },
+    {
+        "id": "7c5a29963e98090e",
+        "type": "http response",
+        "z": "94e9feb7e53ac9be",
+        "name": "response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 500,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7b5154e4f529b722",
+        "type": "http in",
+        "z": "94e9feb7e53ac9be",
+        "name": "",
+        "url": "/orders",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "088f85cc6410ea11"
+            ]
+        ]
+    },
+    {
+        "id": "088f85cc6410ea11",
+        "type": "sqlite",
+        "z": "94e9feb7e53ac9be",
+        "mydb": "bed9e688723fe50d",
+        "sqlquery": "fixed",
+        "sql": "SELECT * FROM Orders",
+        "name": "Northwind",
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "7c5a29963e98090e"
+            ]
+        ]
     }
 ]
