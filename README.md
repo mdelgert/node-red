@@ -11,12 +11,16 @@ https://stevesnoderedguide.com/storing-retrieving-json-data-sqlite
 https://stevesnoderedguide.com/download/node-red-sql-and-json
 https://stevesnoderedguide.com/using-the-exec-node
 https://www.youtube.com/watch?v=81qE8wNHO5Q&list=PLC5hLl1wqo41ylU1A8bkTGxiLFLQY_lUB&index=4&t=18s
+https://www.youtube.com/watch?v=03NwekIdcMo
+https://www.youtube.com/watch?v=RoNucR0fdj0
+https://github.com/joshi-sandeep/Nodered
 
 ### Packages
 https://flows.nodered.org/node/node-red-contrib-credentials
 https://flows.nodered.org/node/node-red-node-swagger
 https://flows.nodered.org/node/sqlite-plugin-red
 https://flows.nodered.org/node/node-red-dashboard
+https://flows.nodered.org/node/node-red-contrib-mongodb-aleph
 
 ### Paths
 /data/projects/node-red/examples/
