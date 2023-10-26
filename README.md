@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=03NwekIdcMo
 https://www.youtube.com/watch?v=RoNucR0fdj0
 https://github.com/joshi-sandeep/Nodered
 https://stackoverflow.com/questions/43477040/update-record-in-monogodb-using-node-red
-
+https://www.tutorialspoint.com/sqlite/sqlite_create_database.htm
 
 ### Packages
 https://flows.nodered.org/node/node-red-contrib-credentials

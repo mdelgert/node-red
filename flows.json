@@ -10,7 +10,15 @@
     {
         "id": "94e9feb7e53ac9be",
         "type": "tab",
-        "label": "Sqlite",
+        "label": "Northwind",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0e4626a6261e1b68",
+        "type": "tab",
+        "label": "Logger",
         "disabled": false,
         "info": "",
         "env": []
@@ -19,6 +27,12 @@
         "id": "bed9e688723fe50d",
         "type": "sqlitedb",
         "db": "/data//projects/node-red/examples/northwind.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "4c519660a6cceb5e",
+        "type": "sqlitedb",
+        "db": "/data//projects/node-red/examples/logger.db",
         "mode": "RWC"
     },
     {
@@ -582,5 +596,372 @@
                 "7c5a29963e98090e"
             ]
         ]
+    },
+    {
+        "id": "5b1ec144c5c05046",
+        "type": "inject",
+        "z": "0e4626a6261e1b68",
+        "name": "",
+        "props": [
+            {
+                "p": "timestamp",
+                "v": "",
+                "vt": "date"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "98ba0ac3af9c9733"
+            ]
+        ]
+    },
+    {
+        "id": "8b1faa969c021c10",
+        "type": "http in",
+        "z": "0e4626a6261e1b68",
+        "name": "",
+        "url": "/readlogs",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "56858c97b253ab53"
+            ]
+        ]
+    },
+    {
+        "id": "9638dbf93fd5c502",
+        "type": "http response",
+        "z": "0e4626a6261e1b68",
+        "name": "Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 530,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d8d041fc85d81a19",
+        "type": "inject",
+        "z": "0e4626a6261e1b68",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "a9c945ee284511e6"
+            ]
+        ]
+    },
+    {
+        "id": "ecee8b1e734a75ea",
+        "type": "debug",
+        "z": "0e4626a6261e1b68",
+        "name": "debug msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "100f17aeb63563f3",
+        "type": "inject",
+        "z": "0e4626a6261e1b68",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "8b764002d215e132"
+            ]
+        ]
+    },
+    {
+        "id": "98ba0ac3af9c9733",
+        "type": "function",
+        "z": "0e4626a6261e1b68",
+        "name": "sql create",
+        "func": "var timestamp = msg.timestamp;\nvar level = \"INFO\"; // Set your desired level\nvar message = \"TEST\"; // Assuming your message contains the log message\n\nvar sql = `INSERT INTO logs (timestamp, level, message, application, host, ip)\n                      VALUES (${timestamp}, \n                      '${level}', \n                      '${message}', \n                      'YourApp', '\n                      YourHost', \n                      '192.168.1.100');`;\n\nmsg.topic = sql;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 60,
+        "wires": [
+            [
+                "84542e8486558fce"
+            ]
+        ]
+    },
+    {
+        "id": "e3fe85ac629e0421",
+        "type": "http in",
+        "z": "0e4626a6261e1b68",
+        "name": "",
+        "url": "/createlog",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 280,
+        "wires": [
+            [
+                "8ebb02341ecb0563"
+            ]
+        ]
+    },
+    {
+        "id": "8ebb02341ecb0563",
+        "type": "function",
+        "z": "0e4626a6261e1b68",
+        "name": "sql create",
+        "func": "// Create a new Date object to get the current date and time\nvar currentDate = new Date();\n\n// Convert the Date object to a timestamp in milliseconds\nvar timestamp = currentDate.getTime();\n\n// Generate insert statement\nvar sql = `INSERT INTO logs (timestamp, level, message, application, host, ip)\n                       VALUES (${timestamp}, \n                             '${msg.payload.level}', \n                             '${msg.payload.message}', \n                             '${msg.payload.application}',  \n                             '${msg.payload.host}', \n                             '${msg.payload.ip}'\n                             );`;\n\nmsg.topic = sql;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "9638dbf93fd5c502",
+                "e1946e6e673421d5"
+            ]
+        ]
+    },
+    {
+        "id": "56858c97b253ab53",
+        "type": "function",
+        "z": "0e4626a6261e1b68",
+        "name": "sql read",
+        "func": "msg.topic = \"SELECT * FROM Logs;\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 340,
+        "wires": [
+            [
+                "ab85277f678d7b6c"
+            ]
+        ]
+    },
+    {
+        "id": "8b764002d215e132",
+        "type": "function",
+        "z": "0e4626a6261e1b68",
+        "name": "sql delete",
+        "func": "msg.topic = \"DELETE FROM Logs;\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "84542e8486558fce"
+            ]
+        ]
+    },
+    {
+        "id": "a9c945ee284511e6",
+        "type": "function",
+        "z": "0e4626a6261e1b68",
+        "name": "sql read",
+        "func": "msg.topic = \"SELECT * FROM Logs;\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "84542e8486558fce"
+            ]
+        ]
+    },
+    {
+        "id": "84542e8486558fce",
+        "type": "sqlite",
+        "z": "0e4626a6261e1b68",
+        "mydb": "4c519660a6cceb5e",
+        "sqlquery": "msg.topic",
+        "sql": "INSERT INTO logs ([timestamp], [level], [message], [application], [host], [ip])\nVALUES (msg.timestamp, 'INFO', 'User login successful', 'MyApp', 'localhost', '192.168.1.100');\n",
+        "name": "Logs",
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "ecee8b1e734a75ea"
+            ]
+        ]
+    },
+    {
+        "id": "e1946e6e673421d5",
+        "type": "sqlite",
+        "z": "0e4626a6261e1b68",
+        "mydb": "4c519660a6cceb5e",
+        "sqlquery": "msg.topic",
+        "sql": "INSERT INTO logs ([timestamp], [level], [message], [application], [host], [ip])\nVALUES (msg.timestamp, 'INFO', 'User login successful', 'MyApp', 'localhost', '192.168.1.100');\n",
+        "name": "Logs",
+        "x": 710,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "579dd32027827304",
+        "type": "http in",
+        "z": "0e4626a6261e1b68",
+        "name": "",
+        "url": "/deletelogs",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "28b35cbe8a3cb984"
+            ]
+        ]
+    },
+    {
+        "id": "28b35cbe8a3cb984",
+        "type": "function",
+        "z": "0e4626a6261e1b68",
+        "name": "sql delete",
+        "func": "msg.topic = \"DELETE FROM Logs;\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "7f9b664e5e66628e"
+            ]
+        ]
+    },
+    {
+        "id": "ab85277f678d7b6c",
+        "type": "sqlite",
+        "z": "0e4626a6261e1b68",
+        "mydb": "4c519660a6cceb5e",
+        "sqlquery": "msg.topic",
+        "sql": "INSERT INTO logs ([timestamp], [level], [message], [application], [host], [ip])\nVALUES (msg.timestamp, 'INFO', 'User login successful', 'MyApp', 'localhost', '192.168.1.100');\n",
+        "name": "Logs",
+        "x": 510,
+        "y": 340,
+        "wires": [
+            [
+                "3327eacef8954727"
+            ]
+        ]
+    },
+    {
+        "id": "3327eacef8954727",
+        "type": "http response",
+        "z": "0e4626a6261e1b68",
+        "name": "Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 690,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "7f9b664e5e66628e",
+        "type": "sqlite",
+        "z": "0e4626a6261e1b68",
+        "mydb": "4c519660a6cceb5e",
+        "sqlquery": "msg.topic",
+        "sql": "INSERT INTO logs ([timestamp], [level], [message], [application], [host], [ip])\nVALUES (msg.timestamp, 'INFO', 'User login successful', 'MyApp', 'localhost', '192.168.1.100');\n",
+        "name": "Logs",
+        "x": 510,
+        "y": 400,
+        "wires": [
+            [
+                "c1f4edfee47d6d42"
+            ]
+        ]
+    },
+    {
+        "id": "c1f4edfee47d6d42",
+        "type": "http response",
+        "z": "0e4626a6261e1b68",
+        "name": "Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 690,
+        "y": 400,
+        "wires": []
     }
 ]
