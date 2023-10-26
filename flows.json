@@ -16,28 +16,10 @@
         "env": []
     },
     {
-        "id": "547e891946a63fb5",
-        "type": "tab",
-        "label": "MongoDB CRUD",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "bed9e688723fe50d",
         "type": "sqlitedb",
         "db": "/data//projects/node-red/examples/northwind.db",
         "mode": "RWC"
-    },
-    {
-        "id": "82cb0f0e0b97467f",
-        "type": "mongodb",
-        "hostname": "changeme.mongodb.net",
-        "topology": "dnscluster",
-        "connectOptions": "",
-        "port": "27017",
-        "db": "nodered",
-        "name": ""
     },
     {
         "id": "71b571d8a411b32c",
@@ -48,7 +30,7 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 100,
+        "x": 110,
         "y": 100,
         "wires": [
             [
@@ -68,7 +50,7 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 250,
+        "x": 300,
         "y": 100,
         "wires": [
             [
@@ -83,8 +65,8 @@
         "name": "Response",
         "statusCode": "200",
         "headers": {},
-        "x": 400,
-        "y": 100,
+        "x": 490,
+        "y": 200,
         "wires": []
     },
     {
@@ -93,7 +75,7 @@
         "z": "1bfd8fba4680f8c2",
         "name": "Example Home page",
         "info": "",
-        "x": 140,
+        "x": 130,
         "y": 60,
         "wires": []
     },
@@ -104,7 +86,7 @@
         "name": "Example Messages",
         "info": "",
         "x": 130,
-        "y": 300,
+        "y": 380,
         "wires": []
     },
     {
@@ -146,24 +128,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 230,
+        "x": 250,
         "y": 240,
         "wires": [
             [
-                "e3a599e6c87d6e58"
+                "243e95ad81a5b411"
             ]
         ]
-    },
-    {
-        "id": "e3a599e6c87d6e58",
-        "type": "http response",
-        "z": "1bfd8fba4680f8c2",
-        "name": "response",
-        "statusCode": "200",
-        "headers": {},
-        "x": 360,
-        "y": 240,
-        "wires": []
     },
     {
         "id": "e22ef674a420f854",
@@ -194,24 +165,13 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 230,
+        "x": 250,
         "y": 200,
         "wires": [
             [
-                "5bd67a5199c313c6"
+                "243e95ad81a5b411"
             ]
         ]
-    },
-    {
-        "id": "5bd67a5199c313c6",
-        "type": "http response",
-        "z": "1bfd8fba4680f8c2",
-        "name": "response",
-        "statusCode": "200",
-        "headers": {},
-        "x": 360,
-        "y": 200,
-        "wires": []
     },
     {
         "id": "a0b6a37077718314",
@@ -236,7 +196,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 120,
-        "y": 340,
+        "y": 420,
         "wires": [
             [
                 "7cda8b0c43aefd01"
@@ -256,8 +216,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 250,
-        "y": 340,
+        "x": 290,
+        "y": 420,
         "wires": []
     },
     {
@@ -282,7 +242,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 120,
-        "y": 400,
+        "y": 460,
         "wires": [
             [
                 "eae19b7eefd0235b"
@@ -301,8 +261,8 @@
         "winHide": false,
         "oldrc": false,
         "name": "",
-        "x": 260,
-        "y": 400,
+        "x": 300,
+        "y": 460,
         "wires": [
             [
                 "b9f17f611c1be0ab"
@@ -328,8 +288,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 450,
-        "y": 340,
+        "x": 490,
+        "y": 400,
         "wires": []
     },
     {
@@ -346,8 +306,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 450,
-        "y": 380,
+        "x": 490,
+        "y": 440,
         "wires": []
     },
     {
@@ -364,9 +324,187 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 430,
-        "y": 420,
+        "x": 470,
+        "y": 480,
         "wires": []
+    },
+    {
+        "id": "30450783fbb96b8d",
+        "type": "http in",
+        "z": "1bfd8fba4680f8c2",
+        "name": "",
+        "url": "/query",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 600,
+        "wires": [
+            [
+                "c7a0ce631e17ed2a",
+                "c36326b92892367d"
+            ]
+        ]
+    },
+    {
+        "id": "27754b715f6d77f6",
+        "type": "comment",
+        "z": "1bfd8fba4680f8c2",
+        "name": "Query strings",
+        "info": "",
+        "x": 110,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "d300de2a07fce4b4",
+        "type": "http request",
+        "z": "1bfd8fba4680f8c2",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:1880/query?param1=value1&param2=value2",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 290,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93a4d9f07ff26543",
+        "type": "inject",
+        "z": "1bfd8fba4680f8c2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 560,
+        "wires": [
+            [
+                "d300de2a07fce4b4"
+            ]
+        ]
+    },
+    {
+        "id": "c7a0ce631e17ed2a",
+        "type": "http response",
+        "z": "1bfd8fba4680f8c2",
+        "name": "response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 300,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "c36326b92892367d",
+        "type": "debug",
+        "z": "1bfd8fba4680f8c2",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.param1",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a9581294efe44ffe",
+        "type": "http in",
+        "z": "1bfd8fba4680f8c2",
+        "name": "/json1",
+        "url": "/json1",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 280,
+        "wires": [
+            [
+                "243e95ad81a5b411",
+                "032eada9685adc70"
+            ]
+        ]
+    },
+    {
+        "id": "032eada9685adc70",
+        "type": "debug",
+        "z": "1bfd8fba4680f8c2",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "4368ddad433abe55",
+        "type": "http in",
+        "z": "1bfd8fba4680f8c2",
+        "name": "",
+        "url": "/json2",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "5e14a11d463c32b3",
+                "032eada9685adc70"
+            ]
+        ]
+    },
+    {
+        "id": "5e14a11d463c32b3",
+        "type": "template",
+        "z": "1bfd8fba4680f8c2",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <head></head>\n    <body>\n        <h1>Hello {{ payload.name }}!</h1>\n    </body>\n</html>",
+        "x": 270,
+        "y": 320,
+        "wires": [
+            [
+                "243e95ad81a5b411"
+            ]
+        ]
     },
     {
         "id": "46d1afde3e8625ee",
@@ -442,368 +580,6 @@
         "wires": [
             [
                 "7c5a29963e98090e"
-            ]
-        ]
-    },
-    {
-        "id": "264294975546bbfd",
-        "type": "inject",
-        "z": "547e891946a63fb5",
-        "name": "",
-        "props": [],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 110,
-        "y": 320,
-        "wires": [
-            [
-                "8a8190d0b503efc7"
-            ]
-        ]
-    },
-    {
-        "id": "1ff7f01219efb711",
-        "type": "mongodb in",
-        "z": "547e891946a63fb5",
-        "mongodb": "82cb0f0e0b97467f",
-        "name": "Logs",
-        "collection": "logs",
-        "operation": "find",
-        "x": 410,
-        "y": 320,
-        "wires": [
-            [
-                "09984b3e9913f4b8"
-            ]
-        ]
-    },
-    {
-        "id": "09984b3e9913f4b8",
-        "type": "debug",
-        "z": "547e891946a63fb5",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 560,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "8a8190d0b503efc7",
-        "type": "function",
-        "z": "547e891946a63fb5",
-        "name": "find log",
-        "func": "msg.payload = {\n  timestamp: 1698346466041\n};\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 320,
-        "wires": [
-            [
-                "1ff7f01219efb711"
-            ]
-        ]
-    },
-    {
-        "id": "b88f58759cf4083a",
-        "type": "inject",
-        "z": "547e891946a63fb5",
-        "name": "",
-        "props": [
-            {
-                "p": "timestamp",
-                "v": "",
-                "vt": "date"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 110,
-        "y": 120,
-        "wires": [
-            [
-                "c204862fbaa13949"
-            ]
-        ]
-    },
-    {
-        "id": "c204862fbaa13949",
-        "type": "function",
-        "z": "547e891946a63fb5",
-        "name": "log message",
-        "func": "msg.level = \"INFO\"\nmsg.message = \"Test1\"\nmsg.application = \"myapp\"\nmsg.host = \"b1\"\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 270,
-        "y": 120,
-        "wires": [
-            [
-                "6819b51b4674fd07"
-            ]
-        ]
-    },
-    {
-        "id": "6819b51b4674fd07",
-        "type": "mongodb out",
-        "z": "547e891946a63fb5",
-        "mongodb": "82cb0f0e0b97467f",
-        "name": "Logs",
-        "collection": "logs",
-        "payonly": false,
-        "upsert": false,
-        "multi": false,
-        "operation": "store",
-        "x": 430,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "7bcfdb2f1a41f194",
-        "type": "comment",
-        "z": "547e891946a63fb5",
-        "name": "Create",
-        "info": "",
-        "x": 90,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "ebea67eb3559468d",
-        "type": "comment",
-        "z": "547e891946a63fb5",
-        "name": "Read One",
-        "info": "",
-        "x": 100,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "22ec447468ea2ec2",
-        "type": "comment",
-        "z": "547e891946a63fb5",
-        "name": "Update",
-        "info": "",
-        "x": 90,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "a96ed809617e5b81",
-        "type": "inject",
-        "z": "547e891946a63fb5",
-        "name": "",
-        "props": [],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 110,
-        "y": 420,
-        "wires": [
-            [
-                "8fc3f8b6fdef641c"
-            ]
-        ]
-    },
-    {
-        "id": "8fc3f8b6fdef641c",
-        "type": "function",
-        "z": "547e891946a63fb5",
-        "name": "update log",
-        "func": "var msg = { \n  'collection': 'logs', \n  'operation': 'update',\n  'query': {\n    _msgid : \"5509b4a7d2c3e4a5\"\n  },\n  'payload': { \n      $set: {\n          message : \"UpdateTest3\"\n      }\n   } \n};\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 420,
-        "wires": [
-            [
-                "a387902dbe050b35"
-            ]
-        ]
-    },
-    {
-        "id": "9cf76a625c57fef3",
-        "type": "inject",
-        "z": "547e891946a63fb5",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 120,
-        "y": 220,
-        "wires": [
-            [
-                "6d61cf04bb6fd45d"
-            ]
-        ]
-    },
-    {
-        "id": "3e80769b8e09e9fc",
-        "type": "comment",
-        "z": "547e891946a63fb5",
-        "name": "Read Many",
-        "info": "",
-        "x": 110,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "6d61cf04bb6fd45d",
-        "type": "mongodb in",
-        "z": "547e891946a63fb5",
-        "mongodb": "82cb0f0e0b97467f",
-        "name": "Logs",
-        "collection": "logs",
-        "operation": "find",
-        "x": 270,
-        "y": 220,
-        "wires": [
-            [
-                "456e61b2f544e3bf"
-            ]
-        ]
-    },
-    {
-        "id": "456e61b2f544e3bf",
-        "type": "debug",
-        "z": "547e891946a63fb5",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 420,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "a387902dbe050b35",
-        "type": "mongodb out",
-        "z": "547e891946a63fb5",
-        "mongodb": "82cb0f0e0b97467f",
-        "name": "Logs",
-        "collection": "logs",
-        "payonly": false,
-        "upsert": false,
-        "multi": true,
-        "operation": "update",
-        "x": 450,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "b35895f39ac572cb",
-        "type": "comment",
-        "z": "547e891946a63fb5",
-        "name": "Delete",
-        "info": "",
-        "x": 90,
-        "y": 480,
-        "wires": []
-    },
-    {
-        "id": "ebf12a34c0e7f829",
-        "type": "mongodb out",
-        "z": "547e891946a63fb5",
-        "mongodb": "82cb0f0e0b97467f",
-        "name": "Logs",
-        "collection": "logs",
-        "payonly": false,
-        "upsert": false,
-        "multi": false,
-        "operation": "delete",
-        "x": 450,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "a66946971c505418",
-        "type": "function",
-        "z": "547e891946a63fb5",
-        "name": "delete log",
-        "func": "msg.payload = {\n  _msgid: \"5509b4a7d2c3e4a5\"\n};\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 280,
-        "y": 520,
-        "wires": [
-            [
-                "ebf12a34c0e7f829"
-            ]
-        ]
-    },
-    {
-        "id": "952c89884fd301ec",
-        "type": "inject",
-        "z": "547e891946a63fb5",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 120,
-        "y": 520,
-        "wires": [
-            [
-                "a66946971c505418"
             ]
         ]
     }
