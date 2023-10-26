@@ -14,6 +14,8 @@ https://www.youtube.com/watch?v=81qE8wNHO5Q&list=PLC5hLl1wqo41ylU1A8bkTGxiLFLQY_
 https://www.youtube.com/watch?v=03NwekIdcMo
 https://www.youtube.com/watch?v=RoNucR0fdj0
 https://github.com/joshi-sandeep/Nodered
+https://stackoverflow.com/questions/43477040/update-record-in-monogodb-using-node-red
+
 
 ### Packages
 https://flows.nodered.org/node/node-red-contrib-credentials

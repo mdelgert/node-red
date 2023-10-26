@@ -16,10 +16,28 @@
         "env": []
     },
     {
+        "id": "547e891946a63fb5",
+        "type": "tab",
+        "label": "MongoDB CRUD",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "bed9e688723fe50d",
         "type": "sqlitedb",
         "db": "/data//projects/node-red/examples/northwind.db",
         "mode": "RWC"
+    },
+    {
+        "id": "82cb0f0e0b97467f",
+        "type": "mongodb",
+        "hostname": "changeme.mongodb.net",
+        "topology": "dnscluster",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "nodered",
+        "name": ""
     },
     {
         "id": "71b571d8a411b32c",
@@ -318,6 +336,7 @@
         "id": "d14c48765b3c9ad2",
         "type": "debug",
         "z": "1bfd8fba4680f8c2",
+        "d": true,
         "name": "stderr",
         "active": true,
         "tosidebar": true,
@@ -335,6 +354,7 @@
         "id": "4eacc38af969855e",
         "type": "debug",
         "z": "1bfd8fba4680f8c2",
+        "d": true,
         "name": "return code",
         "active": true,
         "tosidebar": true,
@@ -422,6 +442,368 @@
         "wires": [
             [
                 "7c5a29963e98090e"
+            ]
+        ]
+    },
+    {
+        "id": "264294975546bbfd",
+        "type": "inject",
+        "z": "547e891946a63fb5",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "8a8190d0b503efc7"
+            ]
+        ]
+    },
+    {
+        "id": "1ff7f01219efb711",
+        "type": "mongodb in",
+        "z": "547e891946a63fb5",
+        "mongodb": "82cb0f0e0b97467f",
+        "name": "Logs",
+        "collection": "logs",
+        "operation": "find",
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "09984b3e9913f4b8"
+            ]
+        ]
+    },
+    {
+        "id": "09984b3e9913f4b8",
+        "type": "debug",
+        "z": "547e891946a63fb5",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8a8190d0b503efc7",
+        "type": "function",
+        "z": "547e891946a63fb5",
+        "name": "find log",
+        "func": "msg.payload = {\n  timestamp: 1698346466041\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 320,
+        "wires": [
+            [
+                "1ff7f01219efb711"
+            ]
+        ]
+    },
+    {
+        "id": "b88f58759cf4083a",
+        "type": "inject",
+        "z": "547e891946a63fb5",
+        "name": "",
+        "props": [
+            {
+                "p": "timestamp",
+                "v": "",
+                "vt": "date"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "c204862fbaa13949"
+            ]
+        ]
+    },
+    {
+        "id": "c204862fbaa13949",
+        "type": "function",
+        "z": "547e891946a63fb5",
+        "name": "log message",
+        "func": "msg.level = \"INFO\"\nmsg.message = \"Test1\"\nmsg.application = \"myapp\"\nmsg.host = \"b1\"\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 120,
+        "wires": [
+            [
+                "6819b51b4674fd07"
+            ]
+        ]
+    },
+    {
+        "id": "6819b51b4674fd07",
+        "type": "mongodb out",
+        "z": "547e891946a63fb5",
+        "mongodb": "82cb0f0e0b97467f",
+        "name": "Logs",
+        "collection": "logs",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 430,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7bcfdb2f1a41f194",
+        "type": "comment",
+        "z": "547e891946a63fb5",
+        "name": "Create",
+        "info": "",
+        "x": 90,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "ebea67eb3559468d",
+        "type": "comment",
+        "z": "547e891946a63fb5",
+        "name": "Read One",
+        "info": "",
+        "x": 100,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "22ec447468ea2ec2",
+        "type": "comment",
+        "z": "547e891946a63fb5",
+        "name": "Update",
+        "info": "",
+        "x": 90,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a96ed809617e5b81",
+        "type": "inject",
+        "z": "547e891946a63fb5",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 420,
+        "wires": [
+            [
+                "8fc3f8b6fdef641c"
+            ]
+        ]
+    },
+    {
+        "id": "8fc3f8b6fdef641c",
+        "type": "function",
+        "z": "547e891946a63fb5",
+        "name": "update log",
+        "func": "var msg = { \n  'collection': 'logs', \n  'operation': 'update',\n  'query': {\n    _msgid : \"5509b4a7d2c3e4a5\"\n  },\n  'payload': { \n      $set: {\n          message : \"UpdateTest3\"\n      }\n   } \n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 420,
+        "wires": [
+            [
+                "a387902dbe050b35"
+            ]
+        ]
+    },
+    {
+        "id": "9cf76a625c57fef3",
+        "type": "inject",
+        "z": "547e891946a63fb5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 220,
+        "wires": [
+            [
+                "6d61cf04bb6fd45d"
+            ]
+        ]
+    },
+    {
+        "id": "3e80769b8e09e9fc",
+        "type": "comment",
+        "z": "547e891946a63fb5",
+        "name": "Read Many",
+        "info": "",
+        "x": 110,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6d61cf04bb6fd45d",
+        "type": "mongodb in",
+        "z": "547e891946a63fb5",
+        "mongodb": "82cb0f0e0b97467f",
+        "name": "Logs",
+        "collection": "logs",
+        "operation": "find",
+        "x": 270,
+        "y": 220,
+        "wires": [
+            [
+                "456e61b2f544e3bf"
+            ]
+        ]
+    },
+    {
+        "id": "456e61b2f544e3bf",
+        "type": "debug",
+        "z": "547e891946a63fb5",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a387902dbe050b35",
+        "type": "mongodb out",
+        "z": "547e891946a63fb5",
+        "mongodb": "82cb0f0e0b97467f",
+        "name": "Logs",
+        "collection": "logs",
+        "payonly": false,
+        "upsert": false,
+        "multi": true,
+        "operation": "update",
+        "x": 450,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "b35895f39ac572cb",
+        "type": "comment",
+        "z": "547e891946a63fb5",
+        "name": "Delete",
+        "info": "",
+        "x": 90,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "ebf12a34c0e7f829",
+        "type": "mongodb out",
+        "z": "547e891946a63fb5",
+        "mongodb": "82cb0f0e0b97467f",
+        "name": "Logs",
+        "collection": "logs",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 450,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "a66946971c505418",
+        "type": "function",
+        "z": "547e891946a63fb5",
+        "name": "delete log",
+        "func": "msg.payload = {\n  _msgid: \"5509b4a7d2c3e4a5\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 520,
+        "wires": [
+            [
+                "ebf12a34c0e7f829"
+            ]
+        ]
+    },
+    {
+        "id": "952c89884fd301ec",
+        "type": "inject",
+        "z": "547e891946a63fb5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 520,
+        "wires": [
+            [
+                "a66946971c505418"
             ]
         ]
     }
